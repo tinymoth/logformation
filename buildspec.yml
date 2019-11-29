@@ -9,7 +9,7 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
-      - aws cloudformation validate-template --template-body file://vpc.yml 
+      - aws cloudformation validate-template --template-body file://`pwd`/vpc.yml 
   build:
     commands:
       - echo Build started on `date`
