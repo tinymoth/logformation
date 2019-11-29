@@ -11,3 +11,4 @@ Resources:
       Tags:
       - Key: Name
         Value:  !Join ['', [!Ref "AWS::StackName", "-VPC2" ]]
+MAKE THE BUILD FAIL
