@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      dotnet: 2.2
+      dotnet: 3.0
     commands:
       - echo Install a runtime, even though I don't need one
   pre_build:
