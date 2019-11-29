@@ -1,1 +1,4 @@
 # logformation
+![Build Status](https://codebuild.eu-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiaEZ4NG9WU3lxOERnNk0rQVduaHE3RU52SGc0L0NBYkZUY0FuSHd1aXJ6UmtZWmZTaGF2UklSVGM4R24xdW43bUhrZmFZRjhRS29jNU03a2VacHh0dWNjPSIsIml2UGFyYW1ldGVyU3BlYyI6IkpyZ0tqREJyYWE2cVVhQ1IiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
+
+Cloudformation experiments with ELK stack in AWS EKS
