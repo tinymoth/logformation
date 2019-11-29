@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Nothing to do in the install phase...
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo I can see these files `ls -la`
+      - touch hello.txt
+      - echo "Hello, World!" > hello.txt
+      - zip hello.zip hello.txt
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo I can see these files `ls -la`
+artifacts:
+  files:
+    - hello.zip
