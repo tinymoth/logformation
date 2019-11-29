@@ -17,7 +17,6 @@ phases:
       - touch hello.txt
       - echo "Hello, World!" > hello.txt
       - zip hello.zip hello.txt
-      - aws cloudformation deploy --template-file ./vpc.yml --stack-name myNetwork
   post_build:
     commands:
       - echo Build completed on `date`
