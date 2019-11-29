@@ -2,8 +2,10 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      dotnet: 2.2
     commands:
-      - echo Nothing to do in the install phase...
+      - echo Install a runtime, even though I don't need one
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
