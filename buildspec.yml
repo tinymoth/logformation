@@ -9,6 +9,7 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
+      - aws cloudformation validate-template --template-body file://vpc.yml 
   build:
     commands:
       - echo Build started on `date`
@@ -16,6 +17,7 @@ phases:
       - touch hello.txt
       - echo "Hello, World!" > hello.txt
       - zip hello.zip hello.txt
+      - aws cloudformation deploy --template-file ./vpc.yml --stack-name logformation
   post_build:
     commands:
       - echo Build completed on `date`
