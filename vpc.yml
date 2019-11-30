@@ -11,4 +11,4 @@ Resources:
       EnableDnsSupport: true
       Tags:
         - Key: Name
-          Value: !Sub '${AWS::Stackname}-VPC2'
+          Value: !Sub '${AWS::StackName}-VPC2'
