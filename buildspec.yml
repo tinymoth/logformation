@@ -1,35 +1,33 @@
+--- 
 version: 0.2
-
-phases:
-  install:
-    runtime-versions:
+phases: 
+  install: 
+    runtime-versions: 
       python: 3.8
       ruby: 2.6
-    commands:
-      # Install CFN-Lint, and YAMLLint
-      - pip3 install cfn-lint yamllint
-      # Install cfn-nag
-      - gem install cfn-nag
-  pre_build:
-    commands:
-      - echo Validating the template
-      - aws cloudformation validate-template --template-body file://vpc.yml 
-      - echo Linting the template
-      - yamllint --strict vpc.yml
-      - cfn-lint --include-checks I --template vpc.yml
-      - echo Nagging the template
-      - cfn_nag --fail-on-warnings --output-format txt vpc.yml
-  build:
-    commands:
-      - echo Build started on `date`
-      - echo I can see these files `ls -la`
-      - touch hello.txt
-      - echo "Hello, World!" > hello.txt
-      - zip hello.zip hello.txt
-  post_build:
-    commands:
-      - echo Build completed on `date`
-      - echo I can see these files `ls -la`
-artifacts:
-  files:
+    commands: 
+      - "pip3 install cfn-lint yamllint"
+      - "gem install cfn-nag"
+  pre_build: 
+    commands: 
+      - "echo Validating the template"
+      - "aws cloudformation validate-template --template-body file://vpc.yml"
+      - "echo Linting the template"
+      - "yamllint --strict vpc.yml"
+      - "cfn-lint --include-checks I --template vpc.yml"
+      - "echo Nagging the template"
+      - "cfn_nag --fail-on-warnings --output-format txt vpc.yml"
+  build: 
+    commands: 
+      - "echo Build started on `date`"
+      - "echo I can see these files `ls -la`"
+      - "touch hello.txt"
+      - "echo \"Hello, World!\" > hello.txt"
+      - "zip hello.zip hello.txt"
+  post_build: 
+    commands: 
+      - "echo Build completed on `date`"
+      - "echo I can see these files `ls -la`"
+artifacts: 
+  files: 
     - hello.zip
