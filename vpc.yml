@@ -11,4 +11,4 @@ Resources:
       EnableDnsSupport: true
       Tags:
         - Key: Name
-          Value: !Join ['', [!Ref "AWS::StackName", "-VPC2" ]]
+          Value: !Join ['',[!Ref "AWS::StackName","-VPC2"]]
