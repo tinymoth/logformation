@@ -1,5 +1,6 @@
+---
 AWSTemplateFormatVersion: 2010-09-09
-# Simple VPC cloudformation template 
+# Simple VPC cloudformation template
 Resources:
   # My VPC:
   VPC:
@@ -9,5 +10,5 @@ Resources:
       EnableDnsHostnames: true
       EnableDnsSupport: true
       Tags:
-      - Key: Name
-        Value:  !Join ['', [!Ref "AWS::StackName", "-VPC2" ]]
+        - Key: Name
+          Value: !Join ['', [!Ref "AWS::StackName", "-VPC2" ]]
