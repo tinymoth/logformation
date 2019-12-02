@@ -10,7 +10,7 @@ Parameters:
     Description: The AvailabilityZone to use for the second subnet. (Default eu-west-2b)
     Type: AWS::EC2::AvailabilityZone::Name
     Default: eu-west-2b
-  AvailabilityZone2:
+  AvailabilityZone3:
     Description: The AvailabilityZone to use for the third subnet. (Default eu-west-2c)
     Type: AWS::EC2::AvailabilityZone::Name
     Default: eu-west-2c
