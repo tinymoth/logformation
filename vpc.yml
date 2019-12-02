@@ -3,15 +3,15 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: An AWS ElasticSearch Template
 Parameters: 
   AvailabilityZone1:
-    Description: The AvailabilityZone to use for the first subnet. Default eu-west-2a
+    Description: The AvailabilityZone to use for the first subnet. (Default eu-west-2a)
     Type: AWS::EC2::AvailabilityZone::Name
     Default: eu-west-2a
   AvailabilityZone2:
-    Description: The AvailabilityZone to use for the second subnet. Default: eu-west-2b
+    Description: The AvailabilityZone to use for the second subnet. (Default eu-west-2b)
     Type: AWS::EC2::AvailabilityZone::Name
     Default: eu-west-2b
   AvailabilityZone2:
-    Description: The AvailabilityZone to use for the third subnet. Default: eu-west-2c
+    Description: The AvailabilityZone to use for the third subnet. (Default eu-west-2c)
     Type: AWS::EC2::AvailabilityZone::Name
     Default: eu-west-2c
 Resources:
