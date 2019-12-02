@@ -1,14 +1,116 @@
 ---
 AWSTemplateFormatVersion: 2010-09-09
-# Simple VPC cloudformation template
+Description: An AWS ElasticSearch Template
 Resources:
-  # My VPC:
-  VPC:
-    Type: AWS::EC2::VPC
+  myVPC:
+    Type: 'AWS::EC2::VPC'
     Properties:
-      CidrBlock: 192.168.0.0/16
-      EnableDnsHostnames: true
-      EnableDnsSupport: true
+      CidrBlock: 172.31.0.0/16
+      InstanceTenancy: default
+      EnableDnsSupport: 'true'
+      EnableDnsHostnames: 'true'
       Tags:
         - Key: Name
-          Value: !Sub '${AWS::StackName}-VPC2'
+          Value: !Sub 'my-${AWS::StackName}-VPC'
+  subnetOne:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: 172.31.0.0/20
+      AvailabilityZone: eu-west-2c
+      VpcId: !Ref myVPC
+  subnetTwo:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: 172.31.32.0/20
+      AvailabilityZone: eu-west-2b
+      VpcId: !Ref myVPC
+  subnetThree:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: 172.31.16.0/20
+      AvailabilityZone: eu-west-2a
+      VpcId: !Ref myVPC
+  myIGW:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties: {}
+  myDHCPOpts:
+    Type: 'AWS::EC2::DHCPOptions'
+    Properties:
+      DomainName: eu-west-2.compute.internal
+      DomainNameServers:
+        - AmazonProvidedDNS
+  mySecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: A simple security group
+      GroupName: mySecurityGroup
+      VpcId: !Ref myVPC
+      SecurityGroupIngress:
+        Description: Allow SSH from all
+        CidrIp: 0.0.0.0/0
+        IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+      SecurityGroupEgress:
+        Description: Allow SSH from all
+        CidrIp: 0.0.0.0/0
+        IpProtocol: -1
+        FromPort: 0
+        ToPort: 65535
+  myNetACL:
+    Type: 'AWS::EC2::NetworkAcl'
+    Properties:
+      VpcId: !Ref myVPC
+  myRouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref myVPC
+  aclOne:
+    Type: 'AWS::EC2::NetworkAclEntry'
+    Properties:
+      CidrBlock: 0.0.0.0/0
+      Egress: 'true'
+      Protocol: '-1'
+      RuleAction: allow
+      RuleNumber: '100'
+      NetworkAclId: !Ref myNetACL
+  aclTwo:
+    Type: 'AWS::EC2::NetworkAclEntry'
+    Properties:
+      CidrBlock: 0.0.0.0/0
+      Protocol: '-1'
+      RuleAction: allow
+      RuleNumber: '100'
+      NetworkAclId: !Ref myNetACL
+  subnetOneAcl:
+    Type: 'AWS::EC2::SubnetNetworkAclAssociation'
+    Properties:
+      NetworkAclId: !Ref myNetACL
+      SubnetId: !Ref subnetOne
+  subnetTwoAcl:
+    Type: 'AWS::EC2::SubnetNetworkAclAssociation'
+    Properties:
+      NetworkAclId: !Ref myNetACL
+      SubnetId: !Ref subnetTwo
+  subnetThreeAcl:
+    Type: 'AWS::EC2::SubnetNetworkAclAssociation'
+    Properties:
+      NetworkAclId: !Ref myNetACL
+      SubnetId: !Ref subnetThree
+  myGateway:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      VpcId: !Ref myVPC
+      InternetGatewayId: !Ref myIGW
+  routeOne:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      RouteTableId: !Ref myRouteTable
+      GatewayId: !Ref myIGW
+    DependsOn: myGateway
+  dhcpAssoc:
+    Type: 'AWS::EC2::VPCDHCPOptionsAssociation'
+    Properties:
+      VpcId: !Ref myVPC
+      DhcpOptionsId: !Ref myDHCPOpts
