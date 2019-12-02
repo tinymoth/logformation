@@ -10,13 +10,14 @@ phases:
       - "gem install cfn-nag"
   pre_build: 
     commands: 
-      - "echo Validating the template"
-      - "aws cloudformation validate-template --template-body file://vpc.yml"
-      - "echo Linting the template"
+      - "echo Linting the YAML"
       - "yamllint --strict vpc.yml"
+      - "echo Linting the template"
       - "cfn-lint --include-checks I --template vpc.yml"
       - "echo Nagging the template"
       - "cfn_nag --fail-on-warnings --output-format txt vpc.yml"
+      - "echo Validating the template"
+      - "aws cloudformation validate-template --template-body file://vpc.yml"
   build: 
     commands: 
       - "echo Build started on `date`"
