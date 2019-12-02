@@ -1,6 +1,19 @@
 ---
 AWSTemplateFormatVersion: 2010-09-09
 Description: An AWS ElasticSearch Template
+Parameters: 
+  AvailabilityZone1:
+    Description: The AvailabilityZone to use for the first subnet. Default eu-west-2a
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: eu-west-2a
+  AvailabilityZone2:
+    Description: The AvailabilityZone to use for the second subnet. Default: eu-west-2b
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: eu-west-2b
+  AvailabilityZone2:
+    Description: The AvailabilityZone to use for the third subnet. Default: eu-west-2c
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: eu-west-2c
 Resources:
   myVPC:
     Type: 'AWS::EC2::VPC'
@@ -16,19 +29,19 @@ Resources:
     Type: 'AWS::EC2::Subnet'
     Properties:
       CidrBlock: 172.31.0.0/20
-      AvailabilityZone: eu-west-2c
+      AvailabilityZone: {Ref: AvailabilityZone1}
       VpcId: !Ref myVPC
   subnetTwo:
     Type: 'AWS::EC2::Subnet'
     Properties:
       CidrBlock: 172.31.32.0/20
-      AvailabilityZone: eu-west-2b
+      AvailabilityZone: {Ref: AvailabilityZone2}
       VpcId: !Ref myVPC
   subnetThree:
     Type: 'AWS::EC2::Subnet'
     Properties:
       CidrBlock: 172.31.16.0/20
-      AvailabilityZone: eu-west-2a
+      AvailabilityZone: {Ref: AvailabilityZone3}
       VpcId: !Ref myVPC
   myIGW:
     Type: 'AWS::EC2::InternetGateway'
