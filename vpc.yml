@@ -70,21 +70,21 @@ Resources:
           IpProtocol: '-1'
           FromPort: 0
           ToPort: 65535
-  Metadata:
-    cfn_lint:
-      rules_to_suppress:
-        - id: W2
-          reason: "Suppress world-wide incoming cidr."
-        - id: W5
-          reason: "Suppress world-wide outgoing cidr."
-        - id: W9
-          reason: "Suppress non-/32 ingress cidr."
-        - id: W28
-          reason: "Suppress explicit name."
-        - id: W29
-          reason: "Suppress egress port range."
-        - id: W40
-          reason: "Suppress egress any protocol."
+    Metadata:
+      cfn_lint:
+        rules_to_suppress:
+          - id: W2
+            reason: "Suppress world-wide incoming cidr."
+          - id: W5
+            reason: "Suppress world-wide outgoing cidr."
+          - id: W9
+            reason: "Suppress non-/32 ingress cidr."
+          - id: W28
+            reason: "Suppress explicit name."
+          - id: W29
+            reason: "Suppress egress port range."
+          - id: W40
+            reason: "Suppress egress any protocol."
   myNetACL:
     Type: 'AWS::EC2::NetworkAcl'
     Properties:
